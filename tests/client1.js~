@@ -3,7 +3,8 @@ var server = new hermes.Server('rep');
 var sys = require('sys');
 var zmq = require('zmq');
 
-
+var uri = new Uri('tesla:aqtivity:12412512512351252');
+sys.puts(uri.toHermesLink);
  
 sys.puts("Required index");
 

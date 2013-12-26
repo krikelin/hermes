@@ -11,7 +11,7 @@ var sys = require('sys');
  * @contructor
  **/
 var Uri = function (uri) {
-  this.cond = /tesla[:\/\/]([a-z]+):([a-zA-Z0-9:]+)(:[a-zA-Z0-9]+)+/i;
+  this.cond = /tesla[:\/\/]([a-z]+):([a-zA-Z0-9:]+)(\:[a-zA-Z0-9]+)+/i;
   if (!uri.match(this.cond)) throw "Invalid uri";
   this.uri = uri;
   var parts = uri.split(this.cond);
