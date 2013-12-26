@@ -15,6 +15,9 @@
     "protocol",
     "hermes"
   ],
+  "dependencies": {
+    "neo4j": "*"
+  },
   "author": "Alexander Forselius <drsounds@gmail.com>",
   "license": "MIT",
   "bugs": {

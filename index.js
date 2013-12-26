@@ -5,11 +5,32 @@
 var net = require('net');
 var sys = require('sys');
 
+var Address = function (addr) {
+	var regex = /^([A-Z]+) (hm:\/\/)((.*)(\/?))+/i;
+	if (addr.match(regex)) {
+		sys.puts('Parsing address');
+  		var segments = addr.split(regex);
+  		console.log(segments)
+		this.method =segments[1];
+		this.parts = segments[3].split('/');
+		this.uri = 'hm://' + this.parts.join('/');
+		this.service = this.parts[0];
+		sys.puts('Service: ' + this.service);
+		sys.puts(this.uri);
+
+		
+  	} else {
+  		throw "Invalid address";
+  	}
+}
+
+exports.Address = Address;
+
 /**
  * @class
  * @constructor
  **/
-var Hermes = function () {
+var Server = function () {
 	var net = require('net');
 	this.sockets = [];
 	var self = this;
@@ -21,11 +42,10 @@ var Hermes = function () {
 
 	  	var uri = data.toString().split('\n')[0];
 	  	sys.puts(uri);
-	  	var regex = /^([a-zA-Z]+) hm:\/\/ (([a-zA-Z0-9]+)\:)+\n/i;
-	  	console.log(regex);
-	  	if (uri.match(/^hm:\/\/([a-zA-Z]+) (([a-zA-Z0-9]+)\:)+\n/i)) {
-	  		var parts = uri.split(regex);
-	  		sys.puts(parts);
+	  	var addr = new Address(data.toString());
+
+	  	switch (addr.service) {
+	  		
 	  	}
 	  });
 	  sock.on('end', function() { // client disconnects
@@ -38,16 +58,31 @@ var Hermes = function () {
 	});
 };
 
-exports.Hermes = Hermes;
+exports.Server = Server;
 
 /**
  * @function
  * @param {Integer} port The port
  * @param {String} addr The address
  **/
-Hermes.prototype.listen = function (port, addr) {
+Server.prototype.listen = function (port, addr) {
 	this.server.listen(port, addr);
 };
 
+/**
+ * @class
+ * @constructor
+ **/
+var Service = function (id) {
+	
+}
 
+/**
+ * @constructor
+ * @method
+ **/
+Service.prototype.request = function (req, callback) {
 
+};
+
+exports.Service = Service;
