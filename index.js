@@ -89,14 +89,15 @@ Server.prototype.listen = function (port, addr) {
   	switch (addr.service) {
   	case "relations":
       // Call relations backend
-      var neo4j = require('neo4j');
+     /* var neo4j = require('neo4j');
       var db = new neo4j.GraphDatabase('http://localhost:7474');
       db.query('MATCH (p {node: "' + addr.parts[1] + '"})-->(m) RETURN p', function (err, results) {
         if (err) throw err;
         self.server.send(JSON.stringify(results));
-      });
+      });*/
       break;
     case "aqtivity":
+      // Call the backend service
       
   	}
   });

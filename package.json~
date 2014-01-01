@@ -4,7 +4,7 @@
   "description": "An open source CLR of the hermes protocol",
   "main": "index.js",
   "scripts": {
-    "test": "for f in tests/*; do echo \"$f\"; node \"$f\"; done; echo 'passed!'; exit 0"
+    "test": "for f in tests/*; do echo "$f"; node "$f"; done; echo 'passed!'; exit 0"
   },
   "repository": {
     "type": "git",
