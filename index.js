@@ -11,7 +11,7 @@ var sys = require('sys');
  * @contructor
  **/
 var Uri = function (uri) {
-  this.cond = /tesla[:\/\/]([a-z]+):([a-zA-Z0-9:]+)(:[a-zA-Z0-9]+)+/i;
+  this.cond = /^tesla:([a-z]+):([a-zA-Z0-9]+):([a-zA-Z0-9]+):/i;
   if (!uri.match(this.cond)) throw "Invalid uri";
   this.uri = uri;
   var parts = uri.split(this.cond);
@@ -27,7 +27,7 @@ var Uri = function (uri) {
  **/
 Uri.prototype.toHermesUri = function (service) {
  
-   var d = this.uri.replace(':', '/').split(this.cond);
+   var d = this.uri.replace(':/', '/').split(this.cond);
     sys.puts(d);
    return 'hm://' + (typeof(service) !== 'undefined' ? (service + '/') : '') + d.slice(1).join('/');
 };
@@ -43,10 +43,11 @@ var Address = function (addr) {
 		this.method =segments[1];
 		this.parts = segments[3].split('/');
 		this.uri = 'hm://' + this.parts.join('/');
+    this.parts = this.parts.slice(1);
 		this.service = this.parts[0];
 		sys.puts('Service: ' + this.service);
 		sys.puts(this.uri);
-
+    sys.puts(this.parts);
 		
   	} else {
   		throw "Invalid address";
